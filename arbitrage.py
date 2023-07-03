@@ -108,10 +108,10 @@ def describe_triangle(prices, triangle, result_writer, csvfile):
     global profit_count
     coins = triangle['coins']
     price_percentage = (triangle['profit'] - 1.0) * 100
-    
+    print(f"{datetime.now()} {'->'.join(coins):26} {round(price_percentage, 4):-7}% profit")
+
     if price_percentage >= 0.05:
-        profit_count += 1
-        print(f"{datetime.now()} {'->'.join(coins):26} {round(price_percentage, 4):-7}% profit")
+        profit_count += 1     
         
         # Create a list of the coin prices
         coin_prices = []
