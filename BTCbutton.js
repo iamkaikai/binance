@@ -1,36 +1,45 @@
 let intervalId;
 let intervalTime = 10;
+let min = Number.POSITIVE_INFINITY;
 
-const setTimer = (time) => {
-    if (intervalId) {
-        clearInterval(intervalId);
+const intervalFunc = () => {
+    let items = document.querySelectorAll('.css-rp1nxq');
+    let btn = document.querySelector('.css-zqm9nz');
+    let textContents = Array.from(items).map(item => item.innerText);
+    let time = parseInt(textContents.join(''));
+    let login = localStorage.getItem('login');
+    
+    if (time < min) min = time;
+
+    if (!isNaN(time)) {
+        console.log(time);
+        console.log("lowest time = " + min);
+        console.log("login = " + login);
     }
 
-    intervalId = setInterval(() => {
-        let items = document.querySelectorAll('.css-rp1nxq');
-        let btn = document.querySelector('.css-zqm9nz');
-        let textContents = Array.from(items).map(item => item.innerText);
-        let time = parseInt(textContents.join(''));
+    if (time >= 3000) {
+        intervalTime = 5000;
+    } else if (time >= 1000) {
+        intervalTime = 1000;
+    } else {
+        intervalTime = 10;
+    }
 
-        console.log(time);
+    if (time <= 100) {
+        btn.click();
+        console.log('Button clicked');
+    }
 
-        if (time >= 3000) {
-            intervalTime = 5000;
-            setTimer(intervalTime);
-        } else if (time >= 1500) {
-            intervalTime = 1000;
-            setTimer(intervalTime);
-        } else {
-            intervalTime = 10;
-            setTimer(intervalTime);
-        }
-        
+    resetTimer(intervalTime);
+};
 
-        if (time <= 70) {
-            btn.click();
-            console.log('Button clicked');
-        }
-    }, time);
-}
+const setTimer = (time) => {
+    intervalId = setInterval(intervalFunc, time);
+};
+
+const resetTimer = (time) => {
+    clearInterval(intervalId);
+    setTimer(time);
+};
 
 setTimer(intervalTime);
