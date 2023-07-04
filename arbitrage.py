@@ -6,14 +6,14 @@ import config, csv
 
 from binance.client import Client
 
-FEE = 0.00075       # Binance VIP0 level spot-trade transaction fee for "Taker" (limit order)
+FEE = 0.001       # Binance VIP0 level spot-trade transaction fee for "Taker" (limit order)
 ITERATIONS = 43200   # iterations to run
-PRIMARY = ['ETH', 'USDT', 'USDC', 'XRP', 'DOGE', 'LTC', 'TRX', 'BTC', 'BNB', 'ADA', 'SOL', 'DOT', 'MATIC', 'BCH', 'WBTC', 'DAI', 'SHIB', 'AVAX', 'BUSD']
+PRIMARY = ['ETH', 'USDT', 'TUSD', 'USDC', 'XRP', 'DOGE', 'LTC', 'TRX', 'BTC', 'BNB', 'ADA', 'SOL', 'DOT', 'MATIC', 'BCH', 'WBTC', 'DAI', 'SHIB', 'AVAX', 'BUSD']
 tri_count = 0
 profit_count = 0
 
 def main():
-    csvfile = open('triangle', 'w', newline='', encoding='UTF8')
+    csvfile = open('triangle', 'a', newline='', encoding='UTF8')
     result = csv.writer(csvfile, delimiter=',')
     count = 0
     global tri_count
@@ -81,7 +81,7 @@ def find_triangles(prices):
             yield triangle
             triangles.append(coins)
 
-    starting_coin = 'USDC'
+    starting_coin = 'TUSD'
     for triangle in recurse_triangle(prices, starting_coin, starting_coin):
         coins = set(triangle['coins'])
         if not any(prev_triangle == coins for prev_triangle in triangles):
