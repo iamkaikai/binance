@@ -26,6 +26,12 @@ const intervalFunc = () => {
     }
 
     if (time <= 100) {
+        // Add some random delay up to 50 milliseconds before clicking the button
+        // let delay = Math.random() * 50;
+        // setTimeout(() => {
+        //     btn.click();
+        //     console.log('Button clicked');
+        // }, delay);
         btn.click();
         console.log('Button clicked');
     }
