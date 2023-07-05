@@ -109,7 +109,9 @@ def describe_triangle(prices, triangle, result_writer, csvfile):
     coins = triangle['coins']
     price_percentage = (triangle['profit'] - 1.0) * 100
     print(f"{datetime.now()} {'->'.join(coins):26} {round(price_percentage, 4):-7}% profit")
-
+    print(coins)        #see the coins
+    print(f'\n')
+    
     if price_percentage >= 0.05:
         profit_count += 1     
         
@@ -121,7 +123,7 @@ def describe_triangle(prices, triangle, result_writer, csvfile):
             coin_prices.append(f"{second:4} / {first:4}: \n{prices[second][first]['price']:-17.8f} \nask_qty: {prices[second][first]['ask_qty']} | bid_qty: {prices[second][first]['bid_qty']} \n")
 
         # Write all data to CSV in one row
-        result_writer.writerow([datetime.now(), '->'.join(coins), str(round(price_percentage, 4))+'%\n', ''.join(coin_prices)+'\n------------------\n'])
+        result_writer.writerow([coins, datetime.now(), '->'.join(coins), str(round(price_percentage, 4))+'%\n', ''.join(coin_prices)+'\n------------------\n'])
         csvfile.flush()  # Flush the buffer to disk
         print('')
 
